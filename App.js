@@ -1,5 +1,25 @@
 import React from 'react'
-import {View, Text, SafeAreaView, StyleSheet} from 'react-native'
+import {View, Text, SafeAreaView, StyleSheet, FlatList} from 'react-native'
+import ColourBox from './colourBox'
+
+const COLORS = [
+  { colorName: 'Base03', hexCode: '#002b36' },
+  { colorName: 'Base02', hexCode: '#073642' },
+  { colorName: 'Base01', hexCode: '#586e75' },
+  { colorName: 'Base00', hexCode: '#657b83' },
+  { colorName: 'Base0', hexCode: '#839496' },
+  { colorName: 'Base1', hexCode: '#93a1a1' },
+  { colorName: 'Base2', hexCode: '#eee8d5' },
+  { colorName: 'Base3', hexCode: '#fdf6e3' },
+  { colorName: 'Yellow', hexCode: '#b58900' },
+  { colorName: 'Orange', hexCode: '#cb4b16' },
+  { colorName: 'Red', hexCode: '#dc322f' },
+  { colorName: 'Magenta', hexCode: '#d33682' },
+  { colorName: 'Violet', hexCode: '#6c71c4' },
+  { colorName: 'Blue', hexCode: '#268bd2' },
+  { colorName: 'Cyan', hexCode: '#2aa198' },
+  { colorName: 'Green', hexCode: '#859900' },
+]
 
 const App = () => {
   return (
@@ -8,10 +28,11 @@ const App = () => {
         <Text style={styles.exalted}>Hello, Exalted!</Text>
         <Text>The Revolution will be televised.</Text>
         <Text style={styles.pick}>Here are some different colours. Pick a costume colour for the Revolution or join the enemy overlords.</Text>
-        <Text style={[styles.colourContainer, styles.cyan]}>Cyan #2aa198</Text>
-        <Text style={styles.colourContainer, styles.blue}>Blue #268bd2</Text>
-        <Text style={styles.colourContainer, styles.magenta}>Magenta #d33682</Text>
-        <Text style={styles.colourContainer, styles.orange}>Orange #cb4b16</Text>
+        <FlatList
+          data={COLORS}
+          keyExtractor={item => item.hexCode}
+          renderItem={({ item }) => <ColourBox colour={item.colorName} colourCode={item.hexCode} />}
+        />
       </View>
     </SafeAreaView>
   )
@@ -24,42 +45,20 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: 'red',
     borderWidth: 2,
-    alignItems: 'center',
+    textAlign: 'center',
     justifyContent: 'center',
     flex: 1
   },
   safeArea: {
-    flex: 2
+    flex: 1
   },
   exalted: {
     fontSize: 20,
     marginBottom: 20
   },
   pick: {
-    margin: 10,
+    marginVertical: 10,
     fontWeight: 'bold'
-  },
-  colourContainer: {
-    paddingVertical: 10,
-    margin: 5,
-    color: 'white',
-    fontWeight: 'bold'
-  },
-  cyan: {
-    paddingHorizontal: 137,
-    backgroundColor: '#2aa198',
-  },
-  blue: {
-    paddingHorizontal: 137,
-    backgroundColor: '#268bd2',
-  },
-  magenta: {
-    paddingHorizontal: 124,
-    backgroundColor: '#d33682',
-  },
-  orange: {
-    paddingHorizontal: 129,
-    backgroundColor: '#cb4b16',
   }
 })
 
